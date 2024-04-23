@@ -67,6 +67,7 @@ Post.prototype.actuallyUpdate = function() {
     this.cleanUp()
     this.validate()
     if (!this.errors.length) {
+     await postsCollection.findOneAndUpdate({_id : new ObjectId(this.requestedPostId)}, {$set: {title: this.data.title, body: this.data.body}})
       resolve("success")
     } else {
       resolve("failure")
