@@ -9,10 +9,10 @@ let sessionOptions = session({
   store: MongoStore.create({client: require('./db')}),
   resave: false,
   saveUninitialized: false,
-  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true} 
 })
 
-app.use(sessionOptions)
+app.use(sessionOptions) 
 app.use(flash())
 
 app.use(function(req, res, next) {

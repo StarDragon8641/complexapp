@@ -7,7 +7,7 @@ const postController = require('./controllers/postController')
 router.get('/', userController.home)
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.post('/logout', userController.logout)
+router.post('/logout', userController.logout) 
 
 // profile related routes
 router.get('/profile/:username', userController.ifUserExists, userController.profilePostsScreen)
