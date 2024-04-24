@@ -33,8 +33,8 @@ Post.prototype.create = function() {
     this.validate()
     if (!this.errors.length) {
       // save post into database
-      postsCollection.insertOne(this.data).then(() => {
-        resolve()
+    postsCollection.insertOne(this.data).then((info) => {
+        resolve(info.insertedId)
       }).catch(() => {
         this.errors.push("Please try again later.")
         reject(this.errors)
@@ -62,7 +62,7 @@ Post.prototype.update = function() {
   })
 }
  
-Post.prototype.actuallyUpdate = function() {
+Post.prototype.actuallyUpdate = function() { 
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
     this.validate()
