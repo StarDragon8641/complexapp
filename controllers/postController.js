@@ -34,7 +34,7 @@ exports.viewEditScreen = async function(req, res) {
       req.session.save(() => res.redirect("/"))
     }
   } catch {
-    res.render("404")
+    res.render("404") 
   }
 }
 
@@ -64,5 +64,15 @@ exports.edit = function(req, res) {
     req.session.save(function() {
       res.redirect("/")
     })
+  })
+}
+
+exports.delete = function(req, res) {
+  Post.delete(req.params.id, req.visitorId).then(() => {
+    req.flash("success", "Post successfully deleted.")
+    req.session.save(() => res.redirect(`/profile/${req.session.user.username}`))
+  }).catch(() => {
+    req.flash("errors", "You do not have permission to perform that action.")
+    req.session.save(() => res.redirect("/"))
   })
 }

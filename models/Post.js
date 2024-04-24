@@ -10,7 +10,7 @@ let Post = function(data, userid, requestedPostId) {
 }
 
 Post.prototype.cleanUp = function() {
-  if (typeof(this.data.title) != "string") {this.data.title = ""}
+  if (typeof(this.data.title) != "string") {this.data.title = ""} 
   if (typeof(this.data.body) != "string") {this.data.body = ""}
 
   // get rid of any bogus properties
@@ -133,4 +133,20 @@ Post.findByAuthorId = function(authorId) {
   ])
 }
 
-module.exports = Post
+Post.delete = function(postIdToDelete, currentUserId) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let post = await Post.findSingleById(postIdToDelete, currentUserId)
+      if (post.isVisitorOwner) {
+        await postsCollection.deleteOne({_id: new ObjectId(postIdToDelete)})
+        resolve()
+      } else {
+        reject()
+      }    
+    } catch {
+      reject()
+    }
+  })
+}
+
+module.exports = Post 
