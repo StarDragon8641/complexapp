@@ -27,7 +27,7 @@ export default class Search {
     }
   
     // 3. Methods
-  keyPressHandler() {
+  keyPressHandler() { 
    let value = this.inputField.value
 
   if(value != "" && value != this.previousValue) {
@@ -40,8 +40,8 @@ export default class Search {
   }
 
   sendRequest() {
-   axios.post('/search', {searchTerm: this.inputField.value}).then(() => {
-
+   axios.post('/search', {searchTerm: this.inputField.value}).then((response) => {
+    console.log(response.data)
    }).catch(() => {
     alert("it works again")
    })
