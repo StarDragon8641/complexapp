@@ -4,7 +4,7 @@
 
     <%- include('includes/flash') %>
 
-    <div class="d-flex justify-content-between"> 
+    <div class="d-flex justify-content-between">   
       <h2><%= post.title %></h2>
       <% if (post.isVisitorOwner) { %> 
         <span class="pt-2">  
@@ -17,8 +17,8 @@
     </div>
       
     <p class="text-muted small mb-4"> 
-      <a href="#"><img class="avatar-tiny" src="<%= post.author.avatar %>"></a>
-      Posted by <a href="#"><%=post.author.username%></a> on <%= post.createdDate.getMonth() + 1 %>/<%=post.createdDate.getDate()%>/<%= post.createdDate.getFullYear() %></p>    
+      <a href="/profile/<%=post.author.username%>"><img class="avatar-tiny" src="<%= post.author.avatar %>"></a>
+      Posted by <a href="/profile/<%=post.author.username%>"><%=post.author.username%></a> on <%= post.createdDate.getMonth() + 1 %>/<%=post.createdDate.getDate()%>/<%= post.createdDate.getFullYear() %></p>    
 
     <div class="body-content">
       <%-filterUserHTML(post.body)%> 
