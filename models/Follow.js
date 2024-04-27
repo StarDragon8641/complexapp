@@ -23,7 +23,7 @@ Follow.prototype.validate = async function() {
 }
 
 Follow.prototype.create = function() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => { 
     this.cleanUp()
     await this.validate()
     if (!this.errors.length) {
@@ -33,6 +33,15 @@ Follow.prototype.create = function() {
       reject(this.errors)
     }
   })
+}
+
+Follow.isVisitorFollowing = async function(followedId, visitorId) {
+  let followDoc = await followsCollection.findOne({followedId: followedId, authorId:  new ObjectId(visitorId)})
+  if(followDoc) {
+   return true
+  } else {
+  return false
+  }
 }
 
 module.exports = Follow
