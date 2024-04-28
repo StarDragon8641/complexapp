@@ -92,7 +92,7 @@ Post.reusablePostQuery = function(uniqueOperations, visitorId, finalOperations =
 
     // clean up author property in each post object
     posts = posts.map(function(post) {
-      post.isVisitorOwner = post.authorId.equals(visitorId)
+      post.isVisitorOwner = post.authorId.equals(visitorId) 
       post.authorId = undefined
 
       post.author = {
@@ -161,6 +161,13 @@ Post.search = function(searchTerm) {
       reject()
     }
   })
+}
+
+Post.countPostsByAuthor = function(id) {
+ return new Promise(async (resolve, reject) => {
+  let postCount = await postsCollection.countDocuments({author: id})
+  resolve(postCount)
+ }) 
 }
 
 module.exports = Post 
