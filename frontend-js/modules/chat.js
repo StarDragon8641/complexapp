@@ -11,7 +11,7 @@ export default class Chat {
     // Events
     events() {
       this.openIcon.addEventListener("click", () => this.showChat())
-      this.closeIcon.addEventListener("click", () => this.hideChat())
+      this.closeIcon.addEventListener("click", () => this.hideChat()) 
     }
   
     // Methods
@@ -28,7 +28,7 @@ export default class Chat {
     }
   
     openConnection() {
-      alert("Opening a connection")
+    this.socket = io()
     }
   
     injectHTML() {
