@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs")
 const usersCollection = require('../db').db().collection("users")
 const validator = require("validator")
 const md5 = require("md5") 
+const { promiseImpl } = require("ejs")
 
 let User = function(data, getAvatar) {
   this.data = data
@@ -92,27 +93,27 @@ User.prototype.getAvatar = function() {
 }
 
 User.findByUsername = function(username) {
- return new Promise(function(resolve, reject) {
-  if(typeof(username) != "string") {
-    reject()
-   return
-  }
-  usersCollection.findOne({username: username}).then(function(userDoc) {
-  if(userDoc) {
-   userDoc = new User(userDoc, true)
-   userDoc = {
-    _id: userDoc.data._id,
-    username: userDoc.data.username, 
-    avatar: userDoc.avatar
-   }
-   resolve(userDoc)
-  } else {
-   reject()
-  }
-  }).catch(function() {
-  reject()
+  return new Promise(function(resolve, reject) {
+    if (typeof(username) != "string") {
+      reject()
+      return
+    }
+    usersCollection.findOne({username: username}).then(function(userDoc) {
+      if (userDoc) {
+        userDoc = new User(userDoc, true)
+        userDoc = {
+          _id: userDoc.data._id,
+          username: userDoc.data.username,
+          avatar: userDoc.avatar
+        }
+        resolve(userDoc)
+      } else {
+        reject()
+      }
+    }).catch(function() {
+      reject() 
+    })
   })
- })
 }
 
 module.exports = User
