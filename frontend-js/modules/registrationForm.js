@@ -8,7 +8,7 @@ export default class RegistrationForm {
     this.username.previousValue = ""
     this.email = document.querySelector('#email-register')
     this.email.previousValue = ""
-    this.password = document.querySelector('#passord-register')
+    this.password = document.querySelector('#password-register')
     this.password.previousValue = ""
     this.events()
   }
@@ -43,10 +43,8 @@ export default class RegistrationForm {
 
   passwordHandler() {
     this.password.errors = false
-    console.log("in Pwd handler 1")
     this.passwordImmediately()
     clearTimeout(this.password.timer)
-    console.log("in Pwd handler 2")
     this.password.timer = setTimeout(() => this.passwordAfterDelay(), 800)
   }
 
@@ -60,7 +58,6 @@ export default class RegistrationForm {
   }
 
   passwordAfterDelay() {
-    console.log("Länge " + this.password.value.length);
     if(this.password.value.length < 12 ) {
       this.showValidationError(this.password, "Password must be at least 12 characters.")
     }
