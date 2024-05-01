@@ -18,7 +18,7 @@ router.get('/profile/:username/following', userController.ifUserExists,userContr
 router.post('/doesUsernameExist', userController.doesUsernameExist) 
 
 // post related routes 
-router.get('/create-post', userController.mustBeLoggedIn, postController.viewCreateScreen)
+router.get('/create-post', userController.mustBeLoggedIn, postController.viewCreateScreen) 
 router.post('/create-post', userController.mustBeLoggedIn, postController.create)
 router.get('/post/:id', postController.viewSingle)
 router.get('/post/:id/edit', userController.mustBeLoggedIn,postController.viewEditScreen) 
